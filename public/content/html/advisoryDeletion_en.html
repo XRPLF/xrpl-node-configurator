@@ -1,0 +1,12 @@
+<h4>Advisory Deletion</h4>
+<div class="mt-2 text-sm text-gray-600">
+    <p>
+        If the config file does not specify an <span class="text-gray-900">online_delete</span> interval, online deletion does not occur. If config file enables the <span class="text-gray-900">advisory_delete</span> setting, online deletion only happens when an administrator triggers it using the can_delete method.
+    </p>
+    <p class="mt-2">
+        You can use advisory deletion with a scheduled job to trigger automatic deletion based on clock time instead of the number of ledger versions closed. If your server is heavily used, the extra load from online deletion can cause your server to fall behind and temporarily de-sync from the consensus network. If this is the case, you can use advisory deletion and schedule online deletion to happen only during off-peak times.
+    </p>
+    <p class="mt-2">
+        You can use advisory deletion for other reasons. For example, you may want to manually confirm that transaction data is backed up to a separate server before deleting it. Alternatively, you may want to manually confirm that a separate task has finished processing transaction data before you delete that data.
+    </p>
+</div>

@@ -1,0 +1,14 @@
+<h4>Database Types</h4>
+<div class="text-gray-600 text-sm mt-2">
+  <p><strong>rippled</strong> creates <strong></strong>4 SQLite databases</strong> to hold bookkeeping information
+    about transactions, local credentials, and various other things.
+  </p>
+  <p class="mt-2">It also creates the <strong>NodeDB</strong>, which holds all the objects that
+    make up the current and historical ledgers.
+  </p>
+  <p class="mt-2">
+    The size of the NodeDB grows in proportion to the amount of new data and the
+    amount of historical data (a configurable setting) so the performance of the
+    underlying storage media where the NodeDB is placed can significantly affect
+    the performance of the server.</p>
+</div>

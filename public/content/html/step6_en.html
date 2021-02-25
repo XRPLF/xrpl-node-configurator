@@ -1,0 +1,23 @@
+<h4>Get Started</h4>
+<div class="text-gray-600 text-sm mt-2">
+  <p class="mt-2">
+The following example gets the latest ledger version and a list of transactions that were newly-validated in that ledger version, using the getLedger() method. Try running it as-is, or change the code and see what happens.
+  </p>
+  <p class="mt-3">
+    <pre class="prettyprint" style="background:#282840;border-radius:10px">
+      <code class="language-javascript">
+        const mainnet = new ripple.RippleAPI({
+          server: 'wss://your.node.url'
+        });
+
+        (async function(api) {
+          await api.connect();
+
+          let response = await api.getLedger({
+            includeTransactions: true
+          });
+          console.log(response);
+
+        })(mainnet);</code><pre>
+  </p>
+</div>

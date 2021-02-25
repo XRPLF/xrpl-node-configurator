@@ -1,0 +1,22 @@
+<h4>Signing Support</h4>
+<div class="mt-2 text-sm text-gray-600">
+  <p>By default, the signing methods for XRP Ledger are limited to administrative connections. If you want to allow signing methods to be used as public API methods, you can enable it with a configuration change.</p>
+  <p>This enables the following methods to be used on "public" JSON-RPC and WebSocket connections, if your server accepts them:</p>
+  <ul class="mt-2">
+    <li class="ml-2"><span class="text-gray-900">sign</span></li>
+    <li class="ml-2"><span class="text-gray-900">sign_for</span></li>
+    <li class="ml-2"><span class="text-gray-900">submit</span> (in "sign-and-submit" mode)</li>
+  </ul>
+  <p class="mt-2">
+    You do not need to enable public signing to use these methods from an admin connection.
+  </p>
+  <div class="px-4 py-3 mt-2 text-blue-900 bg-yellow-100 border-t-4 border-yellow-500 rounded-b shadow-md" role="alert">
+      <div class="flex">
+        <div class="py-1"><svg class="w-6 h-6 mr-4 text-yellow-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+        <div>
+          <p class="font-bold">Caution</p>
+          <p class="text-sm">It is not recommended enabling public signing. Like the <a href="https://xrpl.org/wallet_propose.html" class="text-blue-500" title="wallet_propose method information">wallet_propose method <i class="fas fa-external-link-alt"></i></a>, the signing commands do not perform any actions that would require administrative-level permissions, but restricting them to admin connections protects users from irresponsibly sending or receiving secret keys over unsecured communications, or to servers they do not control.</a></p>
+        </div>
+      </div>
+  </div>
+</div>

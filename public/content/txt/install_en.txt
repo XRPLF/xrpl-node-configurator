@@ -1,0 +1,33 @@
+
+-----------
+Next Steps:
+-----------
+
+You will need to install rippled on your server before you can use this configuration. 
+
+If you already have rippled installed you can skip this section, if not, here are instructions on how to do it:
+
+For more information, see Install rippled.: https://xrpl.org/install-rippled.html
+
+Install on CentOS/Red Hat with yum
+Install a precompiled rippled binary on CentOS or Red Hat Enterprise Linux.
+https://xrpl.org/install-rippled-on-centos-rhel-with-yum.html
+
+Install on Ubuntu or Debian Linux
+Install a precompiled rippled binary on Ubuntu Linux.
+https://xrpl.org/install-rippled-on-ubuntu.html
+
+Build and Run rippled on Ubuntu
+Compile rippled yourself on Ubuntu Linux.
+https://xrpl.org/build-run-rippled-ubuntu.html
+
+Build and Run rippled on macOS
+Compile rippled yourself on macOS.
+https://xrpl.org/build-run-rippled-macos.html
+
+You might want to enable automatic updates on your rippled server:
+
+Update Automatically on Linux
+Set up automatic updates for rippled on Linux.
+https://xrpl.org/update-rippled-automatically-on-linux.html
+
