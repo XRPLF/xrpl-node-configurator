@@ -7,13 +7,11 @@ Configuration tool that will produce a zip file with the following:
 - `instructions.txt` with instructions on how to use the contents of the zip file.
 - `cfg.json` with the JSON configuration.
 
-*WIP:* [Specs Document](https://docs.google.com/document/d/1OuXHtHLongNB7Xb2SrWLwqARWJdg_0x6LxGWH1pfwUQ/edit)
-
 ## Build Setup
 
 ``` bash
 # clone repo
-git clone https://github.com/elmurci/xrpl-node-configurator.git
+git clone https://github.com/XRPLF/xrpl-node-configurator.git
 
 # install dependencies
 yarn install
@@ -52,6 +50,3 @@ After building, this command will push the files inside the `dist` folder to Git
 ```bash
 yarn deploy:ghp
 ```
-
-Repo: [https://github.com/elmurci/xrpl-node-configurator](https://github.com/elmurci/xrpl-node-configurator)
-GH Page: [elmurci.github.io/xrpl-node-configurator](http://elmurci.github.io/xrpl-node-configurator)
