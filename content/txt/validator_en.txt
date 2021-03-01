@@ -1,0 +1,79 @@
+-----------------------------------------
+Enable validation on your rippled server:
+-----------------------------------------
+
+*IMPORTANT**************************************************************************************************************************************************************
+- Store the generated validator-keys.json key file in a secure, offline, and recoverable location, such as an encrypted USB flash drive. 
+- Do not store keys on the validator where you intend to use the keys. 
+- If your secret_key is compromised, revoke the key  immediately. 
+- Do not modify the contents of validator-keys.json, except to update the backup after generating a new token. 
+- If you generate more than one token from the same backup without updating, the network ignores the later tokens because they use the same token_sequence number.
+************************************************************************************************************************************************************************
+
+Enabling validation on your rippled server means providing a validator token in your server's rippled.cfg file.
+
+You can use the validator-keys-tool (https://github.com/ripple/validator-keys-tool) to securely generate and manage your validator keys and tokens.
+
+In a location NOT on your validator:
+
+1. Manually build and run the validator-keys tool, if you don't already have it installed via a rippled RPM.
+2. Generate a validator key pair using the create_keys command.
+
+    $ validator-keys create_keys
+
+    Sample output on Ubuntu:
+
+      Validator keys stored in /home/my-user/.ripple/validator-keys.json
+
+      This file should be stored securely and not shared.
+    
+    Sample output on macOS:
+
+      Validator keys stored in /Users/my-user/.ripple/validator-keys.json
+
+      This file should be stored securely and not shared.
+
+For more information about the validator-keys tool and the key pairs it generates, see the Validator Keys Tool Guide (https://github.com/ripple/validator-keys-tool/blob/master/doc/validator-keys-tool-guide.md).
+
+3. Generate a validator token using the create_token command:
+
+$ validator-keys create_token --keyfile /PATH/TO/YOUR/validator-keys.json
+
+Sample output:
+
+Update rippled.cfg file with these values:
+
+# validator public key: nHUtNnLVx7odrz5dnfb2xpIgbEeJPbzJWfdicSkGyVw1eE5GpjQr
+
+[validator_token]
+eyJ2YWxpZGF0aW9uX3NlY3J|dF9rZXkiOiI5ZWQ0NWY4NjYyNDFjYzE4YTI3NDdiNT
+QzODdjMDYyNTkwNzk3MmY0ZTcxOTAyMzFmYWE5Mzc0NTdmYT|kYWY2IiwibWFuaWZl
+c3QiOiJKQUFBQUFGeEllMUZ0d21pbXZHdEgyaUNjTUpxQzlnVkZLaWxHZncxL3ZDeE
+hYWExwbGMyR25NaEFrRTFhZ3FYeEJ3RHdEYklENk9NU1l1TTBGREFscEFnTms4U0tG
+bjdNTzJmZGtjd1JRSWhBT25ndTlzQUtxWFlvdUorbDJWMFcrc0FPa1ZCK1pSUzZQU2
+hsSkFmVXNYZkFpQnNWSkdlc2FhZE9KYy9hQVpva1MxdnltR21WcmxIUEtXWDNZeXd1
+NmluOEhBU1FLUHVnQkQ2N2tNYVJGR3ZtcEFUSGxHS0pkdkRGbFdQWXk1QXFEZWRGdj
+VUSmEydzBpMjFlcTNNWXl3TFZKWm5GT3I3QzBrdzJBaVR6U0NqSXpkaXRROD0ifQ==  
+
+4. On your validator:
+
+Add [validator_token] and its value to your validator's rippled.cfg file.
+
+If you previously configured your validator without the validator-keys tool, delete [validation_seed] and its value from your rippled.cfg file. This changes your validator public key.
+
+Restart rippled.
+
+  $ sudo systemctl restart rippled.service
+
+Use the server_info command to get information about your validator to verify that it is running as a validator.
+
+  $ rippled server_info
+
+    - The pubkey_validator value in the response should match the public_key in the validator-keys.json file that you generated for use with your validator.
+
+    - The server_state value should be proposing.
+
+***Security Tip:*** Change the permissions on your rippled.cfg file to be more restrictive. On Linux it is recommended to be 0600. You can do this with chmod 0600 rippled.cfg
+
+
+More info: https://xrpl.org/run-rippled-as-a-validator.html

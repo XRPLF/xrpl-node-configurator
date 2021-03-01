@@ -1,0 +1,1275 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://dev.xrpl-node-cfg.xpring.dev/schema.json",
+    "type": "object",
+    "title": "XRPL JSON Configuration Schema",
+    "description": "JSON schema to validate the configuration settings produced by the XRPL Node Configurator UI",
+    "default": {},
+    "version": "1.0.0",
+    "examples": [
+        {
+            "version": "0.0.11",
+            "server": {
+                "runAs": "allPurposeServer",
+                "domain": "maydomain.com",
+                "protocols": {
+                    "peer": {
+                        "enabled": true,
+                        "secure": false,
+                        "ip": "0.0.0.0",
+                        "port": 2459
+                    },
+                    "wsPublic": {
+                        "enabled": true,
+                        "secure": false,
+                        "ip": "0.0.0.0",
+                        "port": 6005
+                    },
+                    "wsAdmin": {
+                        "enabled": true,
+                        "secure": true,
+                        "admin": "127.0.0.1",
+                        "ip": "0.0.0.0",
+                        "port": 6006
+                    },
+                    "jsonRpc": {
+                        "enabled": true,
+                        "secure": false,
+                        "admin": "127.0.0.1",
+                        "ip": "0.0.0.0",
+                        "port": 5005
+                    },
+                    "grpc": {
+                        "enabled": true,
+                        "ip": "0.0.0.0",
+                        "port": 50051
+                    }
+                }
+            },
+            "protocol": {
+                "nodeSize": "tiny",
+                "history": {
+                    "type": "some",
+                    "ledgers": 256
+                },
+                "validators": {
+                    "type": "knownsites",
+                    "list": [
+                        "vl.ripple.com"
+                    ]
+                },
+                "network": "devnet"
+            },
+            "storage": {
+                "purge": {
+                    "online": {
+                        "enabled": true,
+                        "ledgers": 256
+                    },
+                    "none": false,
+                    "advisory": true
+                },
+                "ssd": false,
+                "database": {
+                    "type": "nudb",
+                    "path": "/var/lib/rippled/db",
+                    "bookKeepingPath": "/var/lib/rippled/db"
+                }
+            },
+            "ssl": {
+                "client": {
+                    "verify": false,
+                    "filePath": null,
+                    "dirPath": null
+                },
+                "server": {
+                    "enabled": false,
+                    "certPath": "/etc/ssl/rippled/rippled.crt",
+                    "keyPath": "/etc/ssl/rippled/rippled.key"
+                }
+            },
+            "settings": {
+                "peer": {
+                    "private": false
+                },
+                "signing": {
+                    "support": false
+                },
+                "connections": {
+                    "incoming": 100,
+                    "outgoing": 100
+                },
+                "log": {
+                    "level": "warning",
+                    "logFilePath": "/var/log/rippled/debug.log"
+                }
+            }
+        }
+    ],
+    "required": [
+        "version",
+        "server",
+        "protocol",
+        "storage",
+        "ssl",
+        "settings"
+    ],
+    "definitions": {
+        "filePath": {
+            "type": "string", 
+            "pattern": "^(\/[\\w^ ]+)+\/?([\\w.])+[^.]$"
+        },
+        "dirPath": {
+            "type": "string", 
+            "pattern": "^(\/[\\w^ ]+)+\/?$"
+        }
+    },
+    "properties": {
+        "version": {
+            "$id": "#/properties/version",
+            "type": "string",
+            "title": "Configurator",
+            "description": "The configurator version used for the generation",
+            "default": ""
+        },
+        "server": {
+            "$id": "#/properties/server",
+            "type": "object",
+            "title": "The server settings schema",
+            "description": "Server settings, purpose and what protocols will be enabled",
+            "default": {},
+            "examples": [
+                {
+                    "runAs": "allPurposeServer",
+                    "domain": "mydomain.com",
+                    "protocols": {
+                        "peer": {
+                            "enabled": true,
+                            "secure": false,
+                            "ip": "0.0.0.0",
+                            "port": 2459
+                        },
+                        "wsPublic": {
+                            "enabled": true,
+                            "secure": false,
+                            "admin": "127.0.0.1",
+                            "ip": "0.0.0.0",
+                            "port": 6005
+                        },
+                        "wsAdmin": {
+                            "enabled": true,
+                            "secure": true,
+                            "admin": "127.0.0.1",
+                            "ip": "0.0.0.0",
+                            "port": 6006
+                        },
+                        "jsonRpc": {
+                            "enabled": true,
+                            "secure": false,
+                            "admin": "127.0.0.1",
+                            "ip": "0.0.0.0",
+                            "port": 5005
+                        },
+                        "grpc": {
+                            "enabled": true,
+                            "ip": "0.0.0.0",
+                            "port": 50051
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "runAs"
+            ],
+            "properties": {
+                "runAs": {
+                    "$id": "#/properties/server/properties/runAs",
+                    "type": "string",
+                    "title": "The runAs schema",
+                    "description": "Purpose of the server",
+                    "enum": ["allPurposeServer", "validatorServer", "hubServer", "apiServer", "fullHistoryServer", "developmentServer"],
+                    "default": "allPurposeServer",
+                    "examples": [
+                        "allPurposeServer"
+                    ]
+                },
+                "domain": {
+                    "$id": "#/properties/server/properties/domain",
+                    "type": "string",
+                    "title": "The domain schema",
+                    "description": "Purpose of the domain",
+                    "examples": [
+                        "mydomain.com"
+                    ]
+                },
+                "protocols": {
+                    "$id": "#/properties/server/properties/protocols",
+                    "type": "object",
+                    "title": "The protocols schema",
+                    "description": "Protocols configuration",
+                    "default": {},
+                    "examples": [
+                        {
+                            "peer": {
+                                "enabled": true,
+                                "secure": false,
+                                "ip": "0.0.0.0",
+                                "port": 2459
+                            },
+                            "wsPublic": {
+                                "enabled": true,
+                                "secure": false,
+                                "admin": "127.0.0.1",
+                                "ip": "0.0.0.0",
+                                "port": 6005
+                            },
+                            "wsAdmin": {
+                                "enabled": true,
+                                "secure": true,
+                                "admin": "127.0.0.1",
+                                "ip": "0.0.0.0",
+                                "port": 6006
+                            },
+                            "jsonRpc": {
+                                "enabled": true,
+                                "secure": false,
+                                "admin": "127.0.0.1",
+                                "ip": "0.0.0.0",
+                                "port": 5005
+                            },
+                            "grpc": {
+                                "enabled": true,
+                                "ip": "0.0.0.0",
+                                "port": 50051
+                            }
+                        }
+                    ],
+                    "required": [
+                        "peer",
+                        "wsPublic",
+                        "wsAdmin",
+                        "jsonRpc",
+                        "grpc"
+                    ],
+                    "properties": {
+                        "peer": {
+                            "$id": "#/properties/server/properties/protocols/properties/peer",
+                            "type": "object",
+                            "title": "The peer schema",
+                            "description": "Peer protocol",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "enabled": true,
+                                    "secure": false,
+                                    "ip": "0.0.0.0",
+                                    "port": 2459
+                                }
+                            ],
+                            "required": [
+                                "enabled",
+                                "secure",
+                                "ip",
+                                "port"
+                            ],
+                            "properties": {
+                                "enabled": {
+                                    "$id": "#/properties/server/properties/protocols/properties/peer/properties/enabled",
+                                    "type": "boolean",
+                                    "title": "The enabled schema",
+                                    "description": "True if enabled, false if not.",
+                                    "default": false,
+                                    "examples": [
+                                        true
+                                    ]
+                                },
+                                "secure": {
+                                    "$id": "#/properties/server/properties/protocols/properties/peer/properties/secure",
+                                    "type": "boolean",
+                                    "title": "The secure schema",
+                                    "description": "True if https, false if http.",
+                                    "default": false,
+                                    "examples": [
+                                        false
+                                    ]
+                                },
+                                "ip": {
+                                    "$id": "#/properties/server/properties/protocols/properties/peer/properties/ip",
+                                    "type": "string",
+                                    "title": "The ip schema",
+                                    "description": "IP used by the protocol",
+                                    "default": "0.0.0.0",
+                                    "examples": [
+                                        "0.0.0.0"
+                                    ]
+                                },
+                                "port": {
+                                    "$id": "#/properties/server/properties/protocols/properties/peer/properties/port",
+                                    "type": "integer",
+                                    "title": "The port schema",
+                                    "description": "Port used by the protocol",
+                                    "default": 0,
+                                    "examples": [
+                                        2459
+                                    ]
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        "wsPublic": {
+                            "$id": "#/properties/server/properties/protocols/properties/wsPublic",
+                            "type": "object",
+                            "title": "The wsPublic schema",
+                            "description": "Public Websockets",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "enabled": true,
+                                    "secure": false,
+                                    "ip": "0.0.0.0",
+                                    "port": 6005
+                                }
+                            ],
+                            "required": [
+                                "enabled",
+                                "secure",
+                                "ip",
+                                "port"
+                            ],
+                            "properties": {
+                                "enabled": {
+                                    "$id": "#/properties/server/properties/protocols/properties/wsPublic/properties/enabled",
+                                    "type": "boolean",
+                                    "title": "The enabled schema",
+                                    "description": "True if enabled, false if not.",
+                                    "default": false,
+                                    "examples": [
+                                        true
+                                    ]
+                                },
+                                "secure": {
+                                    "$id": "#/properties/server/properties/protocols/properties/wsPublic/properties/secure",
+                                    "type": "boolean",
+                                    "title": "The secure schema",
+                                    "description": "True if wss, false if ws.",
+                                    "default": false,
+                                    "examples": [
+                                        false
+                                    ]
+                                },
+                                "ip": {
+                                    "$id": "#/properties/server/properties/wsPublic/properties/ip",
+                                    "type": "string",
+                                    "title": "The ip schema",
+                                    "description": "IP used by the protocol",
+                                    "default": "",
+                                    "examples": [
+                                        "0.0.0.0"
+                                    ]
+                                },
+                                "port": {
+                                    "$id": "#/properties/server/properties/protocols/properties/wsPublic/properties/port",
+                                    "type": "integer",
+                                    "title": "The port schema",
+                                    "description": "Port used by the protocol",
+                                    "default": 0,
+                                    "examples": [
+                                        6005
+                                    ]
+                                },
+                                "admin": {
+                                    "$id": "#/properties/server/properties/protocols/properties/wsPublic/properties/admin",
+                                    "type": "string",
+                                    "title": "The admin schema",
+                                    "description": "Administrative commands IP.",
+                                    "default": "127.0.0.1",
+                                    "examples": [
+                                        "127.0.0.1"
+                                    ]
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        "wsAdmin": {
+                            "$id": "#/properties/server/properties/protocols/properties/wsAdmin",
+                            "type": "object",
+                            "title": "The wsAdmin schema",
+                            "description": "Admin level API commands over Websockets",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "enabled": true,
+                                    "secure": true,
+                                    "admin": "127.0.0.1",
+                                    "ip": "0.0.0.0",
+                                    "port": 6006
+                                }
+                            ],
+                            "required": [
+                                "enabled",
+                                "secure",
+                                "admin",
+                                "ip",
+                                "port"
+                            ],
+                            "properties": {
+                                "enabled": {
+                                    "$id": "#/properties/server/properties/protocols/properties/wsAdmin/properties/enabled",
+                                    "type": "boolean",
+                                    "title": "The enabled schema",
+                                    "description": "True if enabled, false if not.",
+                                    "default": false,
+                                    "examples": [
+                                        true
+                                    ]
+                                },
+                                "secure": {
+                                    "$id": "#/properties/server/properties/protocols/properties/wsAdmin/properties/secure",
+                                    "type": "boolean",
+                                    "title": "The secure schema",
+                                    "description": "True if wss, false if ws.",
+                                    "default": false,
+                                    "examples": [
+                                        true
+                                    ]
+                                },
+                                "admin": {
+                                    "$id": "#/properties/server/properties/protocols/properties/wsAdmin/properties/admin",
+                                    "type": "string",
+                                    "title": "The admin schema",
+                                    "description": "Administrative commands IP.",
+                                    "default": "127.0.0.1",
+                                    "examples": [
+                                        "127.0.0.1"
+                                    ]
+                                },
+                                "ip": {
+                                    "$id": "#/properties/server/properties/protocols/properties/wsAdmin/properties/ip",
+                                    "type": "string",
+                                    "title": "The ip schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "0.0.0.0"
+                                    ]
+                                },
+                                "port": {
+                                    "$id": "#/properties/server/properties/protocols/properties/wsAdmin/properties/port",
+                                    "type": "integer",
+                                    "title": "The port schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": 0,
+                                    "examples": [
+                                        6006
+                                    ]
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        "jsonRpc": {
+                            "$id": "#/properties/server/properties/protocols/properties/jsonRpc",
+                            "type": "object",
+                            "title": "The jsonRpc schema",
+                            "description": "JSON-RPC",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "enabled": true,
+                                    "secure": false,
+                                    "admin": "127.0.0.1",
+                                    "ip": "0.0.0.0",
+                                    "port": 5005
+                                }
+                            ],
+                            "required": [
+                                "enabled",
+                                "secure",
+                                "admin",
+                                "ip",
+                                "port"
+                            ],
+                            "properties": {
+                                "enabled": {
+                                    "$id": "#/properties/server/properties/protocols/properties/jsonRpc/properties/enabled",
+                                    "type": "boolean",
+                                    "title": "The enabled schema",
+                                    "description": "True if enabled, false if not",
+                                    "default": false,
+                                    "examples": [
+                                        true
+                                    ]
+                                },
+                                "secure": {
+                                    "$id": "#/properties/server/properties/protocols/properties/jsonRpc/properties/secure",
+                                    "type": "boolean",
+                                    "title": "The secure schema",
+                                    "description": "If true: JSON-RPC over HTTPS, if false: JSON-RPC over HTTP",
+                                    "default": false,
+                                    "examples": [
+                                        false
+                                    ]
+                                },
+                                "admin": {
+                                    "$id": "#/properties/server/properties/protocols/properties/jsonRpc/properties/admin",
+                                    "type": "string",
+                                    "title": "The admin schema",
+                                    "description": "Administrative commands IP.",
+                                    "default": "127.0.0.1",
+                                    "examples": [
+                                        "127.0.0.1"
+                                    ]
+                                },
+                                "ip": {
+                                    "$id": "#/properties/server/properties/protocols/properties/jsonRpc/properties/ip",
+                                    "type": "string",
+                                    "title": "The ip schema",
+                                    "description": "IP used by the protocol.",
+                                    "default": "",
+                                    "examples": [
+                                        "0.0.0.0"
+                                    ]
+                                },
+                                "port": {
+                                    "$id": "#/properties/server/properties/protocols/properties/jsonRpc/properties/port",
+                                    "type": "integer",
+                                    "title": "The port schema",
+                                    "description": "Port used by the protocol.",
+                                    "default": 0,
+                                    "examples": [
+                                        5005
+                                    ]
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        "grpc": {
+                            "$id": "#/properties/server/properties/protocols/properties/grpc",
+                            "type": "object",
+                            "title": "The gRpc schema",
+                            "description": "gRPC settings.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "enabled": true,
+                                    "ip": "0.0.0.0",
+                                    "port": 50051
+                                }
+                            ],
+                            "required": [
+                                "enabled",
+                                "ip",
+                                "port"
+                            ],
+                            "properties": {
+                                "enabled": {
+                                    "$id": "#/properties/server/properties/protocols/properties/grpc/properties/enabled",
+                                    "type": "boolean",
+                                    "title": "The enabled schema",
+                                    "description": "True if enabled, false i not.",
+                                    "default": false,
+                                    "examples": [
+                                        true
+                                    ]
+                                },
+                                "ip": {
+                                    "$id": "#/properties/server/properties/protocols/properties/grpc/properties/ip",
+                                    "type": "string",
+                                    "title": "The ip schema",
+                                    "description": "IP used by the protocol.",
+                                    "default": "0.0.0.0",
+                                    "examples": [
+                                        "0.0.0.0"
+                                    ]
+                                },
+                                "port": {
+                                    "$id": "#/properties/server/properties/protocols/properties/grpc/properties/port",
+                                    "type": "integer",
+                                    "title": "The port schema",
+                                    "description": "Port used by the protocol.",
+                                    "default": 50051,
+                                    "examples": [
+                                        50051
+                                    ]
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "protocol": {
+            "$id": "#/properties/protocol",
+            "type": "object",
+            "title": "The protocol schema",
+            "description": "Protocol settings.",
+            "default": {},
+            "examples": [
+                {
+                    "nodeSize": "tiny",
+                    "history": {
+                        "type": "some",
+                        "ledgers": 256
+                    },
+                    "validators": {
+                        "type": "knownsites",
+                        "list": [
+                            "vl.ripple.com"
+                        ]
+                    },
+                    "network": "devnet"
+                }
+            ],
+            "required": [
+                "nodeSize",
+                "history",
+                "validators",
+                "network"
+            ],
+            "properties": {
+                "nodeSize": {
+                    "$id": "#/properties/protocol/properties/nodeSize",
+                    "type": "string",
+                    "title": "The nodeSize schema",
+                    "description": "Node Size",
+                    "enum": ["tiny", "small", "medium", "huge"],
+                    "default": "tiny",
+                    "examples": [
+                        "tiny"
+                    ]
+                },
+                "history": {
+                    "$id": "#/properties/protocol/properties/history",
+                    "type": "object",
+                    "title": "The history schema",
+                    "description": "History to be stored.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "type": "some",
+                            "ledgers": 256
+                        }
+                    ],
+                    "required": [
+                        "type",
+                        "ledgers"
+                    ],
+                    "properties": {
+                        "type": {
+                            "$id": "#/properties/protocol/properties/history/properties/type",
+                            "type": "string",
+                            "title": "The type schema",
+                            "description": "Type, it can be some history, full history or none.",
+                            "enum": ["some", "full", "none"],
+                            "default": "some",
+                            "examples": [
+                                "some"
+                            ]
+                        },
+                        "ledgers": {
+                            "$id": "#/properties/protocol/properties/history/properties/ledgers",
+                            "type": "integer",
+                            "title": "The ledgers schema",
+                            "description": "How many ledgers to be stored in case the type is 'some'.",
+                            "default": 256,
+                            "examples": [
+                                256
+                            ]
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "validators": {
+                    "$id": "#/properties/protocol/properties/validators",
+                    "type": "object",
+                    "title": "The validators schema",
+                    "description": "Validators List.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "type": "knownsites",
+                            "list": [
+                                "vl.ripple.com"
+                            ]
+                        }
+                    ],
+                    "required": [
+                        "type",
+                        "list"
+                    ],
+                    "properties": {
+                        "type": {
+                            "$id": "#/properties/protocol/properties/validators/properties/type",
+                            "type": "string",
+                            "title": "The type schema",
+                            "description": "Known sites that publis a Validators List.",
+                            "enum": ["knownsites", "ownsites"],
+                            "default": "knownsites",
+                            "examples": [
+                                "knownsites"
+                            ]
+                        },
+                        "list": {
+                            "$id": "#/properties/protocol/properties/validators/properties/list",
+                            "type": "array",
+                            "title": "The list schema",
+                            "description": "URL's of the lists.",
+                            "default": [],
+                            "examples": [
+                                [
+                                    "vl.ripple.com"
+                                ]
+                            ],
+                            "additionalItems": false,
+                            "items": {
+                                "$id": "#/properties/protocol/properties/validators/properties/list/items",
+                                "anyOf": [
+                                    {
+                                        "$id": "#/properties/protocol/properties/validators/properties/list/items/anyOf/0",
+                                        "type": "string",
+                                        "title": "The first anyOf schema",
+                                        "description": "URL's of the lists.",
+                                        "default": "",
+                                        "examples": [
+                                            "vl.ripple.com"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "network": {
+                    "$id": "#/properties/protocol/properties/network",
+                    "type": "string",
+                    "title": "The network schema",
+                    "description": "Network in which the Node will be run.",
+                    "enum": ["devnet", "testnet", "mainnet", "standalone"],
+                    "default": "devnet",
+                    "examples": [
+                        "devnet"
+                    ]
+                }
+            },
+            "additionalProperties": false
+        },
+        "storage": {
+            "$id": "#/properties/storage",
+            "type": "object",
+            "title": "The storage schema",
+            "description": "Data to be stored.",
+            "default": {},
+            "examples": [
+                {
+                    "purge": {
+                        "online": {
+                            "enabled": true,
+                            "ledgers": 256
+                        },
+                        "none": false,
+                        "advisory": true
+                    },
+                    "ssd": false,
+                    "database": {
+                        "type": "nudb",
+                        "path": "/var/lib/rippled/db",
+                        "bookKeepingPath": "/var/lib/rippled/db"
+                    }
+                }
+            ],
+            "required": [
+                "purge",
+                "database",
+                "ssd"
+            ],
+            "properties": {
+                "purge": {
+                    "$id": "#/properties/storage/properties/purge",
+                    "type": "object",
+                    "title": "The purge schema",
+                    "description": "Purge strategy.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "online": {
+                                "enabled": true,
+                                "ledgers": 256
+                            },
+                            "none": false,
+                            "advisory": true
+                        }
+                    ],
+                    "required": [
+                        "online",
+                        "none",
+                        "advisory"
+                    ],
+                    "properties": {
+                        "online": {
+                            "$id": "#/properties/storage/properties/purge/properties/online",
+                            "type": "object",
+                            "title": "The online schema",
+                            "description": "Online delete.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "enabled": true,
+                                    "ledgers": 256
+                                }
+                            ],
+                            "required": [
+                                "enabled",
+                                "ledgers"
+                            ],
+                            "properties": {
+                                "enabled": {
+                                    "$id": "#/properties/storage/properties/purge/properties/online/properties/enabled",
+                                    "type": "boolean",
+                                    "title": "The enabled schema",
+                                    "description": "True if enabled, false if not.",
+                                    "default": false,
+                                    "examples": [
+                                        true
+                                    ]
+                                },
+                                "ledgers": {
+                                    "$id": "#/properties/storage/properties/purge/properties/online/properties/ledgers",
+                                    "type": "integer",
+                                    "title": "The ledgers schema",
+                                    "description": "How many ledgers to keep.",
+                                    "default": 512,
+                                    "examples": [
+                                        512
+                                    ]
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        "none": {
+                            "$id": "#/properties/storage/properties/purge/properties/none",
+                            "type": "boolean",
+                            "title": "The none schema",
+                            "description": "No Online Delete.",
+                            "default": false,
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "advisory": {
+                            "$id": "#/properties/storage/properties/purge/properties/advisory",
+                            "type": "boolean",
+                            "title": "The advisory schema",
+                            "description": "Enable advisory deletion.",
+                            "default": false,
+                            "examples": [
+                                true
+                            ]
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "ssd": {
+                    "$id": "#/properties/storage/properties/ssd",
+                    "type": "boolean",
+                    "title": "The ssd schema",
+                    "description": "SSD settings.",
+                    "default": false,
+                    "additionalProperties": false
+                },
+                "database": {
+                    "$id": "#/properties/storage/properties/database",
+                    "type": "object",
+                    "title": "The database schema",
+                    "description": "Database settings.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "type": "nudb",
+                            "path": "/var/lib/rippled/db",
+                            "bookKeepingPath": "/var/lib/rippled/db"
+                        }
+                    ],
+                    "required": [
+                        "type",
+                        "path",
+                        "bookKeepingPath"
+                    ],
+                    "properties": {
+                        "type": {
+                            "$id": "#/properties/storage/properties/database/properties/type",
+                            "type": "string",
+                            "title": "The type schema",
+                            "description": "Database provider.",
+                            "enum": ["nudb", "rocksdb"],
+                            "default": "nudb",
+                            "examples": [
+                                "nudb"
+                            ]
+                        },
+                        "path": {
+                            "$id": "#/properties/storage/properties/database/properties/path",
+                            "type": "string",
+                            "title": "The path schema",
+                            "description": "Database path.",
+                            "default": "",
+                            "examples": [
+                                "/var/lib/rippled/db"
+                            ]
+                        },
+                        "bookKeepingPath": {
+                            "$id": "#/properties/storage/properties/database/properties/bookKeepingPath",
+                            "type": "string",
+                            "title": "The bookKeepingPath schema",
+                            "description": "Book Keeping Database path.",
+                            "default": "",
+                            "examples": [
+                                "/var/lib/rippled/db"
+                            ]
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "ssl": {
+            "$id": "#/properties/ssl",
+            "type": "object",
+            "title": "The ssl schema",
+            "description": "SSL settings.",
+            "default": {},
+            "examples": [
+                {
+                    "client": {
+                        "verify": false,
+                        "filePath": "/path/to/file",
+                        "fileOrDirPath": "/path/to/file/or/dir"
+                    },
+                    "server": {
+                        "enabled": false,
+                        "certPath": "/etc/ssl/rippled/rippled.crt",
+                        "keyPath": "/etc/ssl/rippled/rippled.key"
+                    }
+                }
+            ],
+            "required": [
+                "client",
+                "server"
+            ],
+            "properties": {
+                "client": {
+                    "$id": "#/properties/ssl/properties/client",
+                    "type": "object",
+                    "title": "The client schema",
+                    "description": "Client settings.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "verify": true,
+                            "filePath": "/path/to/file",
+                            "fileOrDirPath": "/path/to/file/or/path"
+                        }
+                    ],
+                    "properties": {
+                        "verify": {
+                            "$id": "#/properties/ssl/properties/client/properties/verify",
+                            "type": "boolean",
+                            "title": "The verify schema",
+                            "description": "SSL Client verification, if true certificates will be validated.",
+                            "default": false,
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "filePath": { 
+                            "$id": "#/properties/ssl/properties/client/properties/filePath",
+                            "title": "The fileName schema",
+                            "description": "A file system path leading to the certificate verification file for HTTPS client requests."
+                        },
+                        "fileOrDirPath": {
+                            "$id": "#/properties/ssl/properties/client/properties/fileOrDirPath",
+                            "title": "The fileOrDirPath schema",
+                            "description": "A file system path leading to a file or directory containing the root certificates that the server will accept for verifying HTTP servers. Used only for outbound HTTPS client connections."
+                        }
+                    },
+                    "required": [ "verify" ],
+                    "if": {
+                        "properties": {
+                            "verify": {
+                                "enum": [ true ]
+                            }
+                        }
+                    },
+                    "then": {
+                        "properties": {
+                            "filePath": { 
+                                "$ref": "#/definitions/filePath"
+    
+                            },
+                            "fileOrDirPath": {
+                                "anyOf": [
+                                    { "$ref": "#/definitions/filePath" },
+                                    { "$ref": "#/definitions/dirPath" }
+                                ]
+                            }
+                        },
+                        "required": ["filePath", "fileOrDirPath"]
+                    },
+                    "else": {
+                        "properties": {
+                            "filePath": { 
+                                "type": "null"
+    
+                            },
+                            "fileOrDirPath": {
+                                "type": "null"
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "server": {
+                    "$id": "#/properties/ssl/properties/server",
+                    "type": "object",
+                    "title": "The server schema",
+                    "description": "SSL Server settings",
+                    "default": {},
+                    "examples": [
+                        {
+                            "enabled": false,
+                            "certPath": "/etc/ssl/rippled/rippled.crt",
+                            "keyPath": "/etc/ssl/rippled/rippled.key"
+                        }
+                    ],
+                    "required": [
+                        "enabled"
+                    ],
+                    "properties": {
+                        "enabled": {
+                            "$id": "#/properties/ssl/properties/server/properties/enabled",
+                            "type": "boolean",
+                            "title": "The enabled schema",
+                            "description": "True if enabled, false if not.",
+                            "default": false,
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "certPath": {
+                            "$id": "#/properties/ssl/properties/server/properties/certPath",
+                            "title": "The certPath schema",
+                            "description": "Path to the certificate."
+                        },
+                        "keyPath": {
+                            "$id": "#/properties/ssl/properties/server/properties/keyPath",
+                            "title": "The keyPath schema",
+                            "description": "Path to the key."
+                        }
+                    },
+                    "if": {
+                        "properties": {
+                            "enabled": {
+                                "enum": [ true ]
+                            }
+                        }
+                    },
+                    "then": {
+                        "properties": {
+                            "certPath": { 
+                                "$ref": "#/definitions/filePath"
+    
+                            },
+                            "keyPath": {
+                                "$ref": "#/definitions/filePath"
+                            }
+                        },
+                        "required": ["certPath", "keyPath"]
+                    },
+                    "else": {
+                        "properties": {
+                            "certPath": { 
+                                "type": "null"
+    
+                            },
+                            "keyPath": {
+                                "type": "null"
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "settings": {
+            "$id": "#/properties/settings",
+            "type": "object",
+            "title": "The settings schema",
+            "description": "Other settings.",
+            "default": {},
+            "examples": [
+                {
+                    "peer": {
+                        "private": false
+                    },
+                    "signing": {
+                        "support": false
+                    },
+                    "connections": {
+                        "incoming": 100,
+                        "outgoing": 100
+                    },
+                    "log": {
+                        "level": "warning",
+                        "logFilePath": "/var/log/rippled/debug.log"
+                    }
+                }
+            ],
+            "required": [
+                "peer",
+                "signing",
+                "log"
+            ],
+            "properties": {
+                "peer": {
+                    "$id": "#/properties/settings/properties/peer",
+                    "type": "object",
+                    "title": "The peer schema",
+                    "description": "Peer settings.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "private": false
+                        }
+                    ],
+                    "required": [
+                        "private"
+                    ],
+                    "properties": {
+                        "private": {
+                            "$id": "#/properties/settings/properties/peer/properties/private",
+                            "type": "boolean",
+                            "title": "The private schema",
+                            "description": "If true: Request peers not broadcast your address. Only connect to configured peers.",
+                            "default": false,
+                            "examples": [
+                                false
+                            ]
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "signing": {
+                    "$id": "#/properties/settings/properties/signing",
+                    "type": "object",
+                    "title": "The signing schema",
+                    "description": "Signing settings",
+                    "default": {},
+                    "examples": [
+                        {
+                            "support": false
+                        }
+                    ],
+                    "required": [
+                        "support"
+                    ],
+                    "properties": {
+                        "support": {
+                            "$id": "#/properties/settings/properties/signing/properties/support",
+                            "type": "boolean",
+                            "title": "The support schema",
+                            "description": "Specifies whether the server will accept 'sign' and 'sign_for' commandsfrom remote users.",
+                            "default": false,
+                            "examples": [
+                                false
+                            ]
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "connections": {
+                    "$id": "#/properties/settings/properties/connections",
+                    "type": "object",
+                    "title": "The connections schema",
+                    "description": "Connections settings",
+                    "default": {},
+                    "examples": [
+                        {
+                            "incoming": 100,
+                            "outgoing": 100
+                        }
+                    ],
+                    "required": [
+                        "incoming",
+                        "outgoing"
+                    ],
+                    "properties": {
+                        "incoming": {
+                            "$id": "#/properties/settings/properties/signing/properties/incoming",
+                            "type": "number",
+                            "title": "The incoming connections schema",
+                            "description": "Incoming connections limit.",
+                            "default": 100,
+                            "examples": [
+                                100
+                            ]
+                        },
+                        "outgoing": {
+                            "$id": "#/properties/settings/properties/signing/properties/outgoing",
+                            "type": "number",
+                            "title": "The outgoing connections schema",
+                            "description": "outgoing connections limit.",
+                            "default": 100,
+                            "examples": [
+                                100
+                            ]
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "log": {
+                    "$id": "#/properties/settings/properties/log",
+                    "type": "object",
+                    "title": "The log schema",
+                    "description": "Logging settings",
+                    "default": {},
+                    "examples": [
+                        {
+                            "level": "warning",
+                            "logFilePath": "/var/log/rippled/debug.log"
+                        }
+                    ],
+                    "required": [
+                        "level",
+                        "logFilePath"
+                    ],
+                    "properties": {
+                        "level": {
+                            "$id": "#/properties/settings/properties/log/properties/level",
+                            "type": "string",
+                            "title": "The level schema",
+                            "description": "Log level.",
+                            "enum": ["debug", "warning", "info", "error", "fatal"],
+                            "default": "warning",
+                            "examples": [
+                                "warning"
+                            ]
+                        },
+                        "logFilePath": {
+                            "$id": "#/properties/settings/properties/log/properties/logFilePath",
+                            "title": "The logFilePath schema",
+                            "description": "Log file path.",
+                            "$ref": "#/definitions/filePath"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+  }
+  

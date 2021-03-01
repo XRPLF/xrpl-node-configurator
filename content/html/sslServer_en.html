@@ -1,0 +1,20 @@
+<h4>SSL Server</h4>
+<div class="mt-2 text-sm text-gray-600">
+  <p class="mb-3">You can use this command to generate a self-signed key/cert pair:</p>
+  <code class="text-gray-700">
+    openssl req -x509 -sha256 -nodes -days 3650 -newkey rsa:4096 -keyout /etc/ssl/rippled/rippled.key -out /etc/ssl/rippled/rippled.crt
+  </code>
+  <p class="mt-3 mb-3">
+    Keep your key private:
+  </p>
+  <code class="mt-3 text-gray-700">
+    chown -R rippled:rippled /etc/ssl/rippled && chmod -R 500 /etc/ssl/ripple
+  </code>
+  <p class="mt-3 mb-3">
+    On RHEL/CentOS you might have to run:
+  </p>
+  <code class="mt-3 mb-3 text-gray-700">
+    restorecon -FvR /etc/ssl/rippled
+  </code>
+  <p class="mt-3">to change the selinux user to <span class="text-gray-700">system_u</span>.</p>
+</div>
