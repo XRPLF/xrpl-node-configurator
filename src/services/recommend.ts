@@ -108,7 +108,7 @@ const list = (group: ConfigGroup, config: any) : string[] => {
   const recommendations = _getRecsForGroup(group)
   recommendations.forEach((recommendation: Recommendation) => {
     if (!recommendation.fn(config)) {
-      result.push(recommendation.name)
+      result.push(recommendation)
     }
   })
   return result
