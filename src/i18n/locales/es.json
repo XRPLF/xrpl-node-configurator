@@ -1,0 +1,195 @@
+{
+    "language": {
+        "es": {
+            "button": "ES",
+            "title": "Español"
+        },
+        "en": {
+            "button": "EN",
+            "title": "Inglés"
+        }
+    },
+    "header": {
+        "supportedVersion": "Para versión de rippled ",
+        "title": "Configurador de Nodo",
+        "schema": "Esquema",
+        "viewsource": "Ver código fuente en Github",
+        "steps": {
+            "1": "Servidor",
+            "2": "Protocolo",
+            "3": "Almacenamiento",
+            "4": "SSL",
+            "5": "Otros settings",
+            "6": "Final"
+        }
+    },
+    "forms": {
+        "yes": "Si",
+        "no": "No"
+    },
+    "server": {
+        "labels": {
+            "type": "Quiero utilizar mi nodo como",
+            "server": "Servidor",
+            "domain": "Dominio",
+            "protocolsandports": "Protocolos and Puertos",
+            "protocol": "Protocolo",
+            "port": "Puerto",
+            "ip": "IP",
+            "secure": "Seguridad",
+            "admin": "IP de Admin",
+            "peer": "Comunicación con otros nodos",
+            "wspublic": "Websockets Público",
+            "wsadmin": "Websockets Admin",
+            "jsonrpc": "JSON-RPC",
+            "grpc": "gRPC",
+            "dedicatedvalidator": "Validador Dedicado",
+            "hubserver": "Servidor Hub",
+            "fullhistoryserver": "Servidor con historia completa",
+            "dedicatedapiserver": "Servidor de API Dedicado",
+            "allpurposeserver": "Servidor multifunción",
+            "developmentserver": "Servidor para desarrollo"
+        },
+        "placeholders": {
+            "domain": "midominio.com"
+        }
+    },
+    "protocol": {
+        "labels": {
+            "size": "Tamaño",
+            "nodesize": "Tamaño de Nodo",
+            "ledgerhistory": "Historia de libros contables",
+            "networkandvalidators": "Red y Validadores",
+            "network": "Red",
+            "validatorslist": "Lista de Validadores",
+            "knownsites": "Sitios conocidos que sirven listas de validadores",
+            "ledgers": "libros contables",
+            "some": "Algunos, ",
+            "full": "Toda",
+            "none": "Ninguna"
+        },
+        "help": {
+            "sitesselection": "Por favor, selecciona uno o más sitios de la lista."
+        }
+    },
+    "storage": {
+        "labels": {
+            "database": "Almacenamiento Persistente",
+            "databasetype": "Tipo de base de datos",
+            "purge": "Purga de Datos",
+            "automatic": "Automáticamente",
+            "advisorydeletion": "Eliminado manual",
+            "bookkeeping": "Bases de datos de mantenimiento de libros",
+            "databasepath": "Ruta de la base de datos",
+            "ledgers": "libros",
+            "keep": "Mantener siempre",
+            "datadelete": "Permitir el borrado manual de datos.",
+            "ssd": "SSD",
+            "usingSsd": "Dispongo de SSD"
+        },
+        "placeholders": {
+            "databasepath": "/var/lib/rippled/db/"
+        }
+    },
+    "security": {
+        "labels": {
+            "sslclient": "Conexiones (cliente)",
+            "sslclientverify": "Cerificar certificados SSL?",
+            "sslserver": "Conexiones (servidor)",
+            "sslserververify": "TLS",
+            "sslserverkey": "Ruta a la clave SSL en formato PEM",
+            "sslservercert": "Ruta al certificado SSL en formato PEM",
+            "sslserverwarning": "Si no se especifican ficheros y se han seleccionado previamente protocolos seguros, rippled generará un certificado autorfirmado internamente.",
+            "sslverifydir": "Fichero para verificacion de certificados para peticiones HTTPS como cliente",
+            "sslverifyfile": "Ruta en el sistema (directorio o fichero) a los certificados raiz para verificar servidores HTTP"
+        },
+        "placeholders": {
+            "sslverifyfile": "nombre de fichero",
+            "sslverifydir": "/ruta/al/directorio/",
+            "sslservercert": "/ruta/al/certificado.pem",
+            "sslserverkey": "/ruta/a/la/clave.pem"
+        }
+    },
+    "settings": {
+        "labels": {
+            "broadcast": "Emitir tu dirección",
+            "signingsupport": "Funcionalidad para Firma",
+            "log": "Logs",
+            "debug": "Debug",
+            "loglevels": "Nivel de Log",
+            "logfile": "Fichero de Log",
+            "network": "Red",
+            "connections": "Limitar Conexiones",
+            "incoming": "Entrantes",
+            "outgoing": "Salientes"
+        },
+        "placeholders": {
+            "logfile": "/ruta/a/rippled.log"
+        }
+    },
+    "success": {
+        "title": "¡Tu configuración esta lista!",
+        "desc1": "Puedes utilizarla desde este momento para iniciar tu nodo de XRP Ledger. El fichero zip que acabas de descargar tiene el siguiente contenido:",
+        "rippledcfg": "Fichero principal de configuración de tu nodo",
+        "validatorstxt": "Configuración de los validadores.",
+        "cfgjson": "Configuración JSON de los valores que seleccionaste.",
+        "instructionstxt": "Sigue las instrucciones dentro de este fichero para finalizar la configuración",
+        "desc2": "Una vez que tu nodo se inicie, ejecuta el siguiente comando para ver información sobre él:",
+        "desc3": "Puede tomar algunos minutos hasta que tu nodo se sincronice con el resto de la red. Durante este periodo puede que muestre alertas sobre falta de libros contables",
+        "desc4": "Siempre puedes visitar",
+        "desc5": "la web de xrpl.org",
+        "desc6": "si tienes alguna duda",
+        "link1": "Instalar Rippled",
+        "link2": "Requirimientos de Systema",
+        "link3": "Plan de Capacidad"
+    },
+    "helpBox": {
+        "title": "Ayuda"
+    },
+    "footer": {
+        "previous": "Anterior",
+        "next": "Próximo",
+        "load": "Cargar",
+        "json": "JSON",
+        "generate": "Generar"
+    },
+    "errors": {
+        "validation": "Hay algunos errores, por favor, revisa los campos resaltados en amarillo",
+        "validationtitle": "Errores de validación",
+        "jsonconfig": "Por favor, selecciona un fichero JSON válido",
+        "jsonconfigtitle": "Error JSON"
+    },
+    "recommendations": {
+        "title": "Recomendaciones",
+        "rec0001": "En modo Validador solo necesitas una pequeña porción de historial, utiliza RocksDB para mejor rendimiento.",
+        "rec0002": "Los Validadores no deberían guardar más de 300,000 ledgers (aproximadamente dos semanas de historia).",
+        "rec0003": "Para servidores de Producción es recomendable escoger el tamano de nodo 'huge'.",
+        "rec0004": "Es recomendable mantener el nodo en modo privado cuando lo utilizas como Validador",
+        "rec0005": "SSD es requerido con NuDB"
+    },
+    "misc": {
+        "specs": {
+            "tiny": "< 8GB",
+            "small": "8GB",
+            "medium": "16GB",
+            "huge": "32GB"
+        }
+    },
+    "modal": {
+        "recommendations": {
+            "fix": "Volver y modificar",
+            "ignore": "Ingorar y continuar"
+        },
+        "validations": {
+            "fix": "Volver y arreglar"
+        },
+        "error": {
+            "title": "Error"
+        },
+        "close": "Cerrar",
+        "upload": {
+            "title": "Carga de configuración",
+            "message": "La configuración ha sido aplicada exitosamente!"
+        }
+    }
+}

@@ -1,0 +1,96 @@
+{
+  "version": "0.0.9",
+  "server": {
+    "runAs": "allPurposeServer",
+    "protocols": {
+      "peer": {
+        "enabled": true,
+        "secure": false,
+        "ip": "0.0.0.0",
+        "port": 2459
+      },
+      "wsPublic": {
+        "enabled": false,
+        "secure": false,
+        "admin": "127.0.0.1",
+        "ip": "0.0.0.0",
+        "port": 6005
+      },
+      "wsAdmin": {
+        "enabled": false,
+        "secure": false,
+        "admin": "127.0.0.1",
+        "ip": "0.0.0.0",
+        "port": 6006
+      },
+      "jsonRpc": {
+        "enabled": false,
+        "secure": false,
+        "admin": "127.0.0.1",
+        "ip": "0.0.0.0",
+        "port": 5005
+      },
+      "grpc": {
+        "enabled": true,
+        "ip": "0.0.0.0",
+        "port": 50051
+      }
+    }
+  },
+  "protocol": {
+    "nodeSize": "tiny",
+    "history": {
+      "type": "some",
+      "ledgers": 256
+    },
+    "validators": {
+      "type": "knownsites",
+      "list": ["vl.ripple.com"]
+    },
+    "network": "mainnet"
+  },
+  "storage": {
+    "ssd": false,
+    "purge": {
+      "online": {
+        "enabled": true,
+        "ledgers": 512
+      },
+      "none": false,
+      "advisory": true
+    },
+    "database": {
+      "type": "nudb",
+      "path": "/var/lib/rippled/db",
+      "bookKeepingPath": "/var/lib/rippled/db"
+    }
+  },
+  "ssl": {
+    "client": {
+      "verify": false,
+      "filePath": null,
+      "fileOrDirPath": null
+    },
+    "server": {
+      "enabled": false,
+      "certPath": null,
+      "keyPath": null
+    }
+  },
+  "settings": {
+    "peer": {
+      "private": false
+    },
+    "connections": {
+      "incoming": 500,
+      "outgoing": 500
+    },
+    "signing": {
+      "support": false
+    },
+    "log": {
+      "level": "warning",
+      "logFilePath": "/var/log/rippled/debug.log"
+    }
+  }
+}
