@@ -50,3 +50,8 @@ After building, this command will push the files inside the `dist` folder to Git
 ```bash
 yarn deploy:ghp
 ```
+
+## Github Pages site
+
+[xrplf.github.io/xrpl-node-configurator](https://xrplf.github.io/xrpl-node-configurator)
+
