@@ -100,8 +100,6 @@ import recommend from '@/services/recommend'
 import { ConfigGroup, ServerType } from '@/enums'
 // eslint-disable-next-line no-unused-vars
 import { Config } from '@/types/Config'
-// eslint-disable-next-line no-unused-vars
-import { RecommendationResult } from '@/types/RecommendationResult'
 import JSZip from 'jszip'
 import moment from 'moment'
 import i18n from '@/i18n'
@@ -122,7 +120,7 @@ export default class AppFooter extends Vue {
   currentStep = this.$store.state.currentStep
   jsonConfig = this.$store.state.config
   validationErrors: any[] = []
-  recommendations: RecommendationResult[] = []
+  recommendations: string[] = []
   unexpectedError = ''
   locale = this.$store.getters.localStorageLocale || i18n.locale
   

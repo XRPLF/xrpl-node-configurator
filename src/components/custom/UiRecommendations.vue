@@ -20,8 +20,8 @@
       <component v-if="params.component" v-bind="params.props" :is="params.component" />
       <div v-else v-html="params.text || ''" />
       <ul class="ml-2 p-2">
-        <li v-for="item in data" :key="item.name" class="text-gray-900">
-          <i class="fas fa-lightbulb text-orange-500"></i> {{ $t(`recommendations.${item.name}`) }}
+        <li v-for="item in data" :key="item" class="text-gray-900">
+          <i class="fas fa-lightbulb text-orange-500"></i> {{ $t(`recommendations.${item}`) }}
         </li>
       </ul>
     </div>

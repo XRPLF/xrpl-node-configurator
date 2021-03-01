@@ -1,6 +1,6 @@
 {
   "name": "xrpl-node-configurator",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "XRPL Node Configurator",
   "author": "Javi <elmurci@gmail.com>",
   "scripts": {
@@ -19,7 +19,7 @@
     "test:e2e": "PORT=3001 start-server-and-test dev http://localhost:3001 cy:run",
     "test:unit": "jest",
     "test:all": "yarn test:unit && yarn test:e2e",
-    "deploy:ghp": "GIT_DEPLOY_REPO=https://github.com/elmurci/xrpl-node-configurator.git lib/deploy.sh"
+    "deploy:ghp": "GIT_DEPLOY_REPO=https://github.com/XRPLF/xrpl-node-configurator.git lib/deploy.sh"
   },
   "dependencies": {
     "@commitlint/cli": "^11.0.0",

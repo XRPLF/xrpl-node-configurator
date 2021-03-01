@@ -1,5 +1,4 @@
 import { ConfigGroup, ServerType, DatabaseType, NodeSize, Network } from '@/enums'
-import { RecommendationResult } from '@/types/RecommendationResult'
 
 interface Recommendation {
   name: string;
@@ -104,14 +103,12 @@ function rec0005 (config: any) {
   }
 }
 
-const list = (group: ConfigGroup, config: any) : Array<RecommendationResult> => {
-  const result: Array<RecommendationResult> = []
+const list = (group: ConfigGroup, config: any) : string[] => {
+  const result: string[] = []
   const recommendations = _getRecsForGroup(group)
   recommendations.forEach((recommendation: Recommendation) => {
     if (!recommendation.fn(config)) {
-      result.push({
-        name: recommendation.name
-      })
+      result.push(recommendation.name)
     }
   })
   return result
