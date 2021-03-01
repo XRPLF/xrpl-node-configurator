@@ -36,3 +36,7 @@ _tmp/
 tmp/
 .tmp/
 tmp_files/
+
+# cypress
+cypress/videos
+cypress/screenshots
