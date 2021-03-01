@@ -1,4 +1,0 @@
-import 'jest'
-
-test('TODO', () => {
-})
