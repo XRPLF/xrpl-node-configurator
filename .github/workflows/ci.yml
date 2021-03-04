@@ -25,6 +25,19 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/yarn-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+
+      - uses: sergioramos/yarn-actions/install@v6
+        with:
+          frozen-lockfile: true
+
       # Runs e2e test scripts
       - name: Run e2e test scripts
         run: yarn test:e2e
