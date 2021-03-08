@@ -182,7 +182,6 @@ const _generateServer = (configuration: any = {}) => {
   if (cfg.protocols.wsPublic.enabled) result.push('websockets_public') && result.push(singleLineBreak)
   if (cfg.protocols.wsAdmin.enabled) result.push('websockets_admin') && result.push(singleLineBreak)
   if (cfg.protocols.jsonRpc.enabled) result.push('rpc') && result.push(singleLineBreak)
-  if (cfg.protocols.grpc.enabled) result.push('grpc') && result.push(singleLineBreak)
 
   // SSL Server
   if (sslCfg.enabled) {
@@ -272,7 +271,7 @@ const _generateServer = (configuration: any = {}) => {
   }
 
   if (cfg.protocols.grpc.enabled) {
-    result.push('[grpc]')
+    result.push('[port_grpc]')
     result.push(singleLineBreak)
     result.push(`port = ${cfg.protocols.grpc.port}`)
     result.push(singleLineBreak)
