@@ -250,7 +250,7 @@ export default class AppFooter extends Vue {
     const downloadName = this.getFileName()
     const instructions = await this.instructions(this.isItAValidator(config), this.locale)
     cfgFolder!.file('rippled.cfg', this.rippledCfg(config))
-    cfgFolder!.file('validations.txt', this.validatorsTxt(config))
+    cfgFolder!.file('validators.txt', this.validatorsTxt(config))
     zip.file('instructions.txt', instructions)
     zip.file('cfg.json', JSON.stringify(config, null, 1))
     const content = await zip.generateAsync({ type: 'blob' })
