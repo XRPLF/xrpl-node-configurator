@@ -52,6 +52,6 @@ describe('Step 2', () => {
   it('It should load the mainnet site list if Network=MAIN', () => {
     cy.visit(`${host}/#/protocol`)
     cy.get('#network').select('mainnet')
-    cy.get('#validatorSitesOptions option').should('have.length', 2)
+    cy.get('#validatorSitesOptions option').should('have.length', 3)
   })
 })
