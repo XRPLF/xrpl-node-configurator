@@ -83,12 +83,12 @@ const _generateSettings = (configuration: any = {}) => {
     result.push(doubleLineBreak)
   }
   // Fee voting
-  result.push('[voting]')
-  result.push(singleLineBreak)
-  result.push('account_reserve=20000000')
-  result.push(singleLineBreak)
-  result.push('owner_reserve=5000000')
-  result.push(doubleLineBreak)
+  // result.push('[voting]')
+  // result.push(singleLineBreak)
+  // result.push('account_reserve=20000000')
+  // result.push(singleLineBreak)
+  // result.push('owner_reserve=5000000')
+  // result.push(doubleLineBreak)
   return result
 }
 
