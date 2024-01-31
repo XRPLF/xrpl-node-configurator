@@ -32,6 +32,8 @@ jobs:
 
       - name: Run install
         uses: borales/actions-yarn@v4
+        with:
+          cmd: install
 
       # Runs e2e test scripts
       - name: Run e2e test scripts
