@@ -226,6 +226,8 @@ const _generateServer = (configuration: any = {}) => {
     result.push(singleLineBreak)
     result.push(`ip = ${cfg.protocols.wsPublic.ip}`)
     result.push(singleLineBreak)
+    result.push("send_queue_limit = 500") // TODO: make it configurable
+    result.push(singleLineBreak)
     if (cfg.protocols.wsPublic.admin) {
       result.push('# Remote IPv4/6 address that are allowed to run administrative commands')
       result.push(singleLineBreak)
@@ -242,6 +244,8 @@ const _generateServer = (configuration: any = {}) => {
     result.push(`port = ${cfg.protocols.wsAdmin.port}`)
     result.push(singleLineBreak)
     result.push(`ip = ${cfg.protocols.wsAdmin.ip}`)
+    result.push(singleLineBreak)
+    result.push("send_queue_limit = 500") // TODO: make it configurable
     result.push(singleLineBreak)
     if (cfg.protocols.wsAdmin.admin) {
       result.push('# Remote IPv4/6 address that are allowed to run administrative commands')
