@@ -1,0 +1,199 @@
+{
+    "language": {
+        "es": {
+            "button": "ES",
+            "title": "Spanish"
+        },
+        "en": {
+            "button": "EN",
+            "title": "English"
+        },
+        "zh": {
+            "button": "ZH-CN",
+            "title": "中文"
+        }
+    },
+    "header": {
+        "supportedVersion": "支持的rippled版本",
+        "title": "节点配置器",
+        "schema": "架构",
+        "viewsource": "在Github上查看源码",
+        "steps": {
+            "1": "服务器",
+            "2": "协议",
+            "3": "存储",
+            "4": "SSL",
+            "5": "其他设置",
+            "6": "完成"
+        }
+    },
+    "forms": {
+        "yes": "是",
+        "no": "否",
+        "optional": "可选"
+    },
+    "server": {
+        "labels": {
+            "type": "我想将服务器运行为",
+            "server": "服务器",
+            "domain": "域名",
+            "protocolsandports": "协议和端口",
+            "protocol": "协议",
+            "port": "端口",
+            "ip": "IP地址",
+            "secure": "安全",
+            "admin": "管理员IP",
+            "peer": "节点",
+            "wspublic": "Websockets 公开",
+            "wsadmin": "Websockets 管理",
+            "jsonrpc": "JSON-RPC",
+            "grpc": "gRPC",
+            "dedicatedvalidator": "专用验证器",
+            "hubserver": "枢纽服务器",
+            "fullhistoryserver": "完整历史服务器",
+            "dedicatedapiserver": "专用API服务器",
+            "allpurposeserver": "多用途服务器",
+            "developmentserver": "开发机器"
+        },
+        "placeholders": {
+            "domain": "mydomain.com"
+        }
+    },
+    "protocol": {
+        "labels": {
+            "size": "大小",
+            "nodesize": "节点大小",
+            "ledgerhistory": "账本历史",
+            "networkandvalidators": "网络和验证器",
+            "network": "网络",
+            "validatorslist": "验证器列表",
+            "knownsites": "已知验证器站点和密钥",
+            "ledgers": "账本",
+            "some": "一些, ",
+            "full": "完整",
+            "none": "无"
+        },
+        "help": {
+            "sitesselection": "请选择列表中的一个或多个站点。"
+        }
+    },
+    "storage": {
+        "labels": {
+            "database": "持久数据存储",
+            "databasetype": "数据库类型",
+            "purge": "数据清除",
+            "automatic": "自动",
+            "advisorydeletion": "建议删除",
+            "bookkeeping": "账簿数据库",
+            "databasepath": "数据库路径",
+            "ledgers": "账本",
+            "keep": "始终保留",
+            "datadelete": "允许手动删除数据",
+            "ssd": "SSD",
+            "usingSsd": "我正在使用SSD"
+        },
+        "placeholders": {
+            "databasepath": "/var/lib/rippled/db/"
+        }
+    },
+    "security": {
+        "labels": {
+            "sslclient": "客户端连接",
+            "sslclientverify": "验证SSL证书？",
+            "sslserver": "服务器连接",
+            "sslserververify": "TLS",
+            "sslserverkey": "SSL密钥路径（PEM格式）",
+            "sslservercert": "SSL证书路径（PEM格式）",
+            "sslserverwarning": "如果未指定文件且选择了安全协议，rippled将生成内部自签名证书。",
+            "sslverifydir": "HTTPS客户端请求的证书验证文件",
+            "sslverifyfile": "验证HTTP服务器的根证书的系统路径（文件或目录）"
+        },
+        "placeholders": {
+            "sslverifyfile": "文件名",
+            "sslverifydir": "/path/to/dir/",
+            "sslservercert": "/path/to/cert.pem",
+            "sslserverkey": "/path/to/key.pem"
+        }
+    },
+    "settings": {
+        "labels": {
+            "broadcast": "广播您的地址",
+            "signingsupport": "签名支持",
+            "log": "日志",
+            "loglevels": "日志级别",
+            "logfile": "日志文件",
+            "network": "网络",
+            "connections": "限制连接",
+            "incoming": "传入",
+            "outgoing": "传出"
+        },
+        "placeholders": {
+            "logfile": "/path/to/rippled.log"
+        }
+    },
+    "success": {
+        "title": "您的配置已准备就绪！",
+        "desc1": "您现在可以使用它来运行您的XRP分类帐节点。您刚刚下载的压缩文件包含以下文件：",
+        "rippledcfg": "XRP节点的主配置文件。",
+        "validatorstxt": "验证器配置。",
+        "cfgjson": "您选择的设置的JSON配置文件。",
+        "instructionstxt": "按照此文件中的说明完成节点配置。",
+        "desc2": "一旦您的节点运行，您可以执行以下命令以查看您的服务器信息：",
+        "desc3": "rippled与网络同步需要几分钟时间，在此期间它会输出关于缺少账本的警告。",
+        "desc4": "您可以随时查看",
+        "desc5": "xrpl.org网站",
+        "desc6": "如果您有任何疑问",
+        "link1": "安装Rippled",
+        "link2": "系统要求",
+        "link3": "容量规划"
+    },
+    "helpBox": {
+        "title": "帮助框"
+    },
+    "footer": {
+        "previous": "上一步",
+        "next": "下一步",
+        "load": "加载",
+        "json": "JSON",
+        "generate": "生成"
+    },
+    "errors": {
+        "validation": "存在一些错误，请检查高亮显示的字段。",
+        "validationtitle": "验证错误",
+        "jsonconfig": "请加载有效的JSON配置文件",
+        "jsonconfigtitle": "JSON错误"
+    },
+    "recommendations": {
+        "title": "建议",
+        "rec0001": "由于您的服务器是验证器，它只需要少量历史数据，使用RocksDB以获得最佳性能。",
+        "rec0002": "验证器应配置为在账本存储中存储不超过约300,000个账本（大约两周的历史数据）。",
+        "rec0003": "生产服务器推荐使用'huge'大小。",
+        "rec0004": "由于您正在运行验证器，您可能希望将您的服务器配置为私有对等节点。",
+        "rec0005": "使用NuDB需要快速的SSD"
+    },
+    "misc": {
+        "specs": {
+            "tiny": "< 8GB，不推荐用于测试或生产服务器。",
+            "small": "8GB，推荐用于测试服务器。",
+            "medium": "16GB",
+            "huge": "32GB，推荐用于生产服务器。"
+        }
+    },
+    "modal": {
+        "recommendations": {
+            "fix": "返回并修复",
+            "ignore": "忽略并继续"
+        },
+        "validations": {
+            "fix": "返回并修复"
+        },
+        "error": {
+            "title": "错误"
+        },
+        "close": "关闭",
+        "upload": {
+            "title": "配置加载",
+            "message": "您的配置已成功加载！"
+        }
+    }
+}
